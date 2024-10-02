@@ -49,9 +49,9 @@ To run this project on your local machine:
 
 1. **Clone the Repository**: 
    ```bash
-   git clone <[repository-link](https://github.com/heyamay/SQL_Music_Store_Analysis)>
+git clone https://github.com/heyamay/SQL_Music_Store_Analysis
 
-   ### 🚀 About Me
+
 #### Hi, I'm Amay Jaiswal! 👋
 I am a Data Analytics Enthusiast and  Data science practitioner
 
