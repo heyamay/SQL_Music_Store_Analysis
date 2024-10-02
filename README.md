@@ -1,6 +1,7 @@
 # SQL Music Store Analysis
 
-![Banner](https://lbb.in/delhi/best-music-stores-in-delhi/)
+![Banner](https://i0.wp.com/acousticguitar.com/wp-content/uploads/2015/11/music_emporium.jpg?w=750&ssl=1)
+
 
 # Music Store Database Insights
 
