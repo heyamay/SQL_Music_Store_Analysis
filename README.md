@@ -49,7 +49,7 @@ To run this project on your local machine:
 
 1. **Clone the Repository**: 
    ```bash
-git clone https://github.com/heyamay/SQL_Music_Store_Analysis
+    git clone https://github.com/heyamay/SQL_Music_Store_Analysis
 
 
 #### Hi, I'm Amay Jaiswal! 👋
