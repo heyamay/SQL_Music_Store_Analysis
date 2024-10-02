@@ -1,3 +1,5 @@
+
+
 CREATE DATABASE MUSIC_STORE_DB;
 USE MUSIC_STORE_DB;
 
@@ -100,7 +102,7 @@ CREATE TABLE track (
     unit_price DECIMAL(10, 2)
 );
 
--- Question Set 1 - Easy 
+                                                             -- Question Set 1 - Easy 
 
 /* Q1: Who is the senior most employee based on job title? */
 
@@ -142,46 +144,10 @@ GROUP BY customer.customer_id
 ORDER BY total_spending DESC
 LIMIT 1;
 
-USE music_store_db;
--- 1. Who is the senior most employee based on job title?
+                                                 -- Question Set 2 – Moderate 
 
-SELECT * FROM employee
-order by levels desc
-limit 1;
-
--- 2. Which countries have the most Invoices? 
-SELECT COUNT(*) AS c, billing_country 
-FROM invoice
-GROUP BY billing_country
-ORDER BY c DESC Limit 1;
-
--- 3. What are top 3 values of total invoice? 
-SELECT total FROM invoice
-order by total desc
-limit 3;
-
--- 4. Which city has the best customers? We would like to throw a promotional Music  
--- Festival in the city we made the most money. Write a query that returns one city that 
--- has the highest sum of invoice totals. Return both the city name & sum of all invoice totals.
-
-SELECT sum(total) AS total_invoice, billing_city
-FROM invoice
-GROUP BY billing_city
-ORDER BY total_invoice DESC
-LIMIT 1;
-
--- 5. Who is the best customer? The customer who has spent the most money will be declared the best customer. 
--- Write a query that returns the person who has spent the most money 
-
-select sum(total) as InvoiceTotal , customer_id
-from invoice
-group by customer_id
-order by InvoiceTotal desc limit 1;
-
--- Question Set 2 – Moderate 
-
--- 1. Write query to return the email, first name, last name, & Genre of all Rock Music listeners. 
--- Return your list ordered alphabetically by email starting with A
+/* 1. Write query to return the email, first name, last name, & Genre of all Rock Music listeners. 
+ Return your list ordered alphabetically by email starting with A */
 
 
 SELECT DISTINCT email,first_name, last_name
@@ -195,8 +161,8 @@ WHERE track_id IN(
 )
 ORDER BY email;
 
--- 2. Let's invite the artists who have written the most rock music in our dataset. Write a 
--- query that returns the Artist name and total track count of the top 10 rock bands 
+/* 2. Let's invite the artists who have written the most rock music in our dataset. Write a query that returns the Artist name and total track count of the 
+top 10 rock bands */
 
 SELECT artist.name, COUNT(artist.artist_id) AS number_of_songs
 FROM track
@@ -209,8 +175,7 @@ ORDER BY number_of_songs DESC
 LIMIT 10;
 
 /* 3. Return all the track names that have a song length longer than the average song length. 
-Return the Name and Milliseconds for each track. Order by the song length with the 
-longest songs listed first */
+Return the Name and Milliseconds for each track. Order by the song length with the longest songs listed first */
 
 SELECT name ,milliseconds
 from track
@@ -220,8 +185,15 @@ from track )
 order by milliseconds desc;
 
 
--- Question Set 3 – Advance 
+                                                     -- Question Set 3 – Advance 
+
 /* 1. Find how much amount spent by each customer on artists? Write a query to return customer name, artist name and total spent */
+
+/* Steps to Solve: First, find which artist has earned the most according to the InvoiceLines. Now use this artist to find 
+which customer spent the most on this artist. For this query, you will need to use the Invoice, InvoiceLine, Track, Customer, 
+Album, and Artist tables. Note, this one is tricky because the Total spent in the Invoice table might not be on a single product, 
+so you need to use the InvoiceLine table to find out how many of each product was purchased, and then multiply this by the price
+for each artist. */
 
 WITH best_selling_artist AS (
     SELECT artist.artist_id AS artist_id, 
@@ -254,6 +226,8 @@ ORDER BY amount_spent DESC;
 with the highest amount of purchases. Write a query that returns each country along with the top Genre. For countries where 
 the maximum number of purchases is shared return all Genres. */
 
+/* Steps to Solve:  There are two parts in question- first most popular music genre and second need data at the country level. */
+
 WITH popular_genre AS (
     SELECT 
         COUNT(invoice_line.quantity) AS purchases, 
@@ -280,6 +254,8 @@ WHERE purchases = (
 Write a query that returns the country along with the top customer and how much they spent. 
 For countries where the top amount spent is shared, provide all customers who spent this amount. */
 
+/* Steps to Solve: There are two parts in question- first find the most spent on music for each country and second filter the data for respective customers. */
+
 WITH Customter_with_country AS (
 		SELECT customer.customer_id,first_name,last_name,billing_country,SUM(total) AS total_spending,
 	    ROW_NUMBER() OVER(PARTITION BY billing_country ORDER BY SUM(total) DESC) AS RowNo 
@@ -288,6 +264,13 @@ WITH Customter_with_country AS (
 		GROUP BY 1,2,3,4
 		ORDER BY 4 ASC,5 DESC)
 SELECT * FROM Customter_with_country WHERE RowNo <= 1
+
+/* Query executed by - AMAY JAISWAL 
+Data Analyst / Data Scientist Enthusiast 
+Contact me on LinkedIn if you have any query
+*/
+
+/* Thank You :) */
 
 
 
